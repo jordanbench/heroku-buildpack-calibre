@@ -40,7 +40,7 @@ do
 done
 mv ./usr/lib/x86_64-linux-gnu/* $BUILD_DIR/calibre/lib/
 
-curl -o $BUILD_DIR/file-to-db -OLs https://gitlab.com/joseprous/file-to-db/-/jobs/master/artifacts/raw/bin/file-to-db
+curl -o $BUILD_DIR/file-to-db -OLs "https://gitlab.com/joseprous/file-to-db/-/jobs/artifacts//master/raw/bin/file-to-db?job=build"
 chmod +x $BUILD_DIR/file-to-db
 
 echo "-----> Setting up path"
