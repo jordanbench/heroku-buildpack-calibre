@@ -49,4 +49,25 @@ mkdir $BUILD_DIR/.profile.d
 echo "export PATH=\$HOME/calibre:\$PATH" > $BUILD_DIR/.profile.d/calibre.sh
 echo $PATH
 
+echo "-----> Create run script"
+
+cat > $BUILD_DIR/run.sh <<EOF
+_term() { 
+  echo "Caught SIGTERM signal!" 
+  kill -TERM "$child" 2>/dev/null
+  ./file-to-db w library/metadata.db 
+  echo "Down"
+}
+
+trap _term TERM
+
+echo "Starting calibre-server...";
+
+./file-to-db r library/metadata.db 
+calibre-server --enable-auth --port=$PORT --userdb=users.sqlite library &
+
+child=$! 
+wait "$child"
+EOF
+
 echo "-----> Calibre install done"
