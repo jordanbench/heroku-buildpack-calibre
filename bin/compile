@@ -54,7 +54,7 @@ echo "-----> Create run script"
 cat > $BUILD_DIR/run.sh <<EOF
 _term() { 
   echo "Caught SIGTERM signal!" 
-  kill -TERM "$child" 2>/dev/null
+  kill -TERM "\$child" 2>/dev/null
   ./file-to-db w library/metadata.db 
   echo "Down"
 }
@@ -64,10 +64,10 @@ trap _term TERM
 echo "Starting calibre-server...";
 
 ./file-to-db r library/metadata.db 
-calibre-server --enable-auth --port=$PORT --userdb=users.sqlite library &
+calibre-server --enable-auth --port=\$PORT --userdb=users.sqlite library &
 
-child=$! 
-wait "$child"
+child=\$! 
+wait "\$child"
 EOF
 
 echo "-----> Create Procfile"
