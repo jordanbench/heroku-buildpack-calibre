@@ -70,4 +70,11 @@ child=$!
 wait "$child"
 EOF
 
+echo "-----> Create Procfile"
+
+cat > $BUILD_DIR/Procfile <<EOF
+web: sh run.sh
+EOF
+
+
 echo "-----> Calibre install done"
