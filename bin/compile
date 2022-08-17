@@ -22,9 +22,6 @@ echo "-----> Installing Calibre"
 unset PYTHONPATH
 unset PYTHONHOME
 
-apt-get update
-apt-get install -y python2.7 libegl1 libopengl0
-
 python2.7 -c "execfile(\"/tmp/linux-installer.py\"); main(install_dir=\"$BUILD_DIR\", ignore_umask=True)" > /dev/null 2>&1
 
 # libGL dependency required for image processing
